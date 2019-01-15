@@ -12,3 +12,4 @@ Notes for errors made during coding:
   - Instead of can reinitializing value in the loop that reads in the input together.
 4. Implement adjacency list by vector instead of using struct pointer.
 5. Sorting function requires strictly smaller(or larger) comparison, or else will lead to wrong answer.
+6. When calculating number of digits of of a number, using log(num) / log(10) + 1 can lead to wrong answer sometimes. Better convert the number to string & use sz(num.to_string())
