@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/dylan/Desktop/Documents/Codeforces/Educational Codeforces Round 53 (Rated for Div. 2)/A.cpp
+bits/stdc++.h
+-
+
+/home/dylan/Desktop/Documents/Codeforces/Educational Codeforces Round 53 (Rated for Div. 2)/B.cpp
+bits/stdc++.h
+-
+
+/home/dylan/Desktop/Documents/Codeforces/Educational Codeforces Round 53 (Rated for Div. 2)/C.cpp
+bits/stdc++.h
+-
+
+/home/dylan/Desktop/Documents/Codeforces/Educational Codeforces Round 53 (Rated for Div. 2)/D.cpp
+bits/stdc++.h
+-
+

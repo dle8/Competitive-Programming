@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/Educational_Codeforces_Round_53__Rated_for_Div__2_.dir/A.cpp.o CMakeFiles/Educational_Codeforces_Round_53__Rated_for_Div__2_.dir/B.cpp.o CMakeFiles/Educational_Codeforces_Round_53__Rated_for_Div__2_.dir/C.cpp.o CMakeFiles/Educational_Codeforces_Round_53__Rated_for_Div__2_.dir/D.cpp.o  -o Educational_Codeforces_Round_53__Rated_for_Div__2_ 
