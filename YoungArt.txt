@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style type = "text/css">
+		</style>
+	</head>
+
+	<body>
+		<h2 align = "center">National</h2>
+		<br>
+		<strong align = "center"> <h1>YOUNG ARTISTS</h1> </strong>
+		<br>
+		<h1 align = "center">Contest</h1>
+		<br>
+		<br>
+		<strong><h4> 2018 Young Artists Award</h4> </strong>
+	</body>
+</html>
