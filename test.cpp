@@ -1,94 +1,61 @@
-/*
-Author: Dung Tuan Le
-University of Rochester
-*/
-
-#include <bits/stdc++.h>
-#define fio ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL)
 #define FOR(i, l, r) for (int i=l; i<=r; i++)
-#define REP(i, r, l) for (int i=r; i>=l; i--)
-#define mp make_pair
-#define pb push_back
+#define FORALL(iter, x) for (auto iter = x.begin(); iter != x.end(); iter++)
 #define fi first
 #define se second
-#define lb lower_bound
-#define ub upper_bound
 #define sz(x) int(x.size())
-#define eps 1e-9
-
-using namespace std;
-
-typedef long long ll;
-typedef long double ld;
-
 typedef pair<int, int> pii;
-typedef pair<long, long> pll;
-typedef pair<ll, ll> pllll;
-typedef pair<ld, ld> Point;
-typedef pair<Point, Point> line;
-struct strLine { ld a, b, c; };
+const int inf = 1e9;
 
-typedef vector<int> vi;
-typedef vector<long> vl;
-typedef vector<ll> vll;
-
-const double pi = 3.141592653589793;
-
-ll gcd(ll a, ll b, ll &x, ll &y) {
-    if (a == 0) {
-        x = 0; y = 1;
-        return b;
-    }
-    ll x1, y1;
-    ll d = gcd(b%a, a, x1, y1);
-    x = y1 - (b / a) * x1;
-    y = x1;
-    return d;
+int max(int a, int b) {
+    return (a >= b) ? a : b;
 }
 
-ll lcm(ll a, ll b) { return (a*b)/__gcd(a, b); }
-ll max(ll a, ll b) { return (a>=b)?a:b; }
-ll min(ll a, ll b) { return (a<=b)?a:b; }
-
-ll getBit(ll bit, ll x) {
- return (1 & (x >> bit));
-}
-
-#define maxn 20
-ll a[maxn];
-
-int main() {
-	fio;
-  ll test_cases, n, p;
-  cin >> test_cases;
-  FOR(current_test, 1, test_cases) {
-    cin >> n >> p;
-    set<ll> mset;
-    FOR(i, 0, p - 1) {
-      cin >> a[i];
-      mset.insert(a[i]);
-    }
-    p = sz(mset);
-    long tmp = -1;
-    for (auto iter = mset.begin(); iter != mset.end(); iter++) {
-      a[++tmp] = *iter;
-    }
-    ll res = 0;
-    FOR(subset, 1, (1 << p) - 1) {
-      ll tmp = 1;
-      FOR(bit, 0, p - 1) if (getBit(bit, subset) == 1) {
-        if ((tmp - n / ld(a[bit])) > eps) {
-          tmp = 0;
-          break;
+class Solution {
+public:
+    int maxUncrossedLines(vector<int>& a, vector<int>& b) {
+        map<int, vector<int>> mymap;
+        set<int> myset;
+        FOR(i, 0, sz(a) - 1) myset.insert(a[i]);
+        FORALL(iter, myset) {
+            int num = *iter;
+            FOR(i, 0, sz(b) - 1) {
+                if (b[i] == num) mymap[num].push_back(i);
+            }
         }
-        else tmp *= a[bit];
-      }
-      if (tmp == 0) continue;
-      if (__builtin_popcount(subset) % 2 == 0) res -= ll(n / tmp);
-      else res += ll(n / tmp);
+        pii dp[500 + 10][3];
+        dp[0][0] = {0, -1};
+        if (sz(mymap[a[0]]) == 0) {
+            dp[0][1] = {0, -1};
+        }
+        else {
+            dp[0][1] = {1, mymap[a[0]][0]};
+        }
+        for (int i = 1; i <= sz(a) - 1; i++) {
+            pii maxConnect = {-inf, inf};
+            for (int j = 0; j <= i - 1; j++) {
+                if (maxConnect.fi < dp[j].fi) {
+                    vector<int>::iterator up = upper_bound(mymap[a[i]].begin(), mymap[a[i]].end(), dp[j].se);
+                    if (up == mymap[a[i]].end()) continue;
+                    maxConnect = dp[j];
+                }
+                else if (maxConnect.fi == dp[j].fi && maxConnect.se > dp[j].se) {
+                    maxConnect.se = dp[j].se;
+                }
+            }
+            if (maxConnect.fi == -inf) {
+                dp[i][0] = {0, -1};
+                dp[i][1] = {0, -1};
+                continue;
+            }
+            dp[i][1].fi = maxConnect.fi + 1;
+            vector<int>::iterator up = upper_bound(mymap[a[i]].begin(), mymap[a[i]].end(), maxConnect.se);
+            dp[i][1].se = *up;
+            dp[i][0] = {0, -1};
+        }
+        int res = 0;
+        for (int i = 0; i <= sz(a) - 1; i++) {
+            res = max(res, dp[i][1].fi);
+        }
+        return res;
     }
-    cout << res << '\n';
-  }
-
-	return 0;
-}
+};

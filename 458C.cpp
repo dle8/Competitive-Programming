@@ -8,6 +8,7 @@
 #define oo 1000000000
 using namespace std;
 
+
 typedef pair<long, long> pll;
 long n, num[maxn]; 
 pll vote[maxn];

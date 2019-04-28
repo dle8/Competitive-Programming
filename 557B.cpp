@@ -18,11 +18,11 @@ int main() {
 	cin >> n >> w;
 	FOR(i, 1, (2*n)) cin >> cup[i];
 	sort(cup+1, cup+1+(2*n));
-	
+
 	double k = min(cup[1], (double)(cup[n+1]/2.0));
-	
+
 	double res = 3*k*n;
 	cout << setprecision(10) << min(res, w);
-	
+
 	return 0;
 }

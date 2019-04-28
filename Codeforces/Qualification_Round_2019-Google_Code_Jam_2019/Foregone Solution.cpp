@@ -65,6 +65,51 @@ while (ss >> token) cout << token << endl;
 
 int main() {
 	fio;
-	cout << char('3' - 1);
+  long test_cases; cin >> test_cases;
+  FOR(current_test, 1, test_cases) {
+    string num;
+    cin >> num;
+    string res1 = "", res2 = "";
+    FOR(i, 0, sz(num) - 1) {
+      if (num[i] == '4') {
+        res1 += '3';
+        res2 += '1';
+      }
+      else {
+        res1 += num[i];
+        res2 += '0';
+      }
+    }
+    while (res2 != "" && res2[0] == '0') res2.erase(res2.begin());
+    if (res2 == "") {
+      if (res1[sz(res1) - 1] == '5') {
+        res1[sz(res1) - 1] = '3';
+        res2 = '2';
+      }
+      else if (res1[sz(res1) - 1] == '0') {
+        res2 = '1';
+        long ptr = sz(res1) - 1;
+        while (ptr >= 0 && res1[ptr] == '0') {
+          res1[ptr] = '9';
+          ptr--;
+        }
+        if (ptr >= 0) {
+          if (res1[ptr] == '5') {
+            res1[ptr] = '3';
+            FOR(i, ptr + 1, sz(res1) - 2) res2 = '0' + res2;
+            res2 = '2' + res2;
+          }
+          else res1[ptr] = char(res1[ptr] - 1);
+        }
+      }
+      else {
+        res1[sz(res1) - 1] = char(res1[sz(res1) - 1] - 1);
+        res2 = '1';
+      }
+    }
+    while (res1 != "" && res1[0] == '0') res1.erase(res1.begin());
+    while (res2 != "" && res2[0] == '0') res2.erase(res2.begin());
+    cout << "Case #" << current_test << ": " << res1 << " " << res2 << '\n';
+  }
 	return 0;
 }
